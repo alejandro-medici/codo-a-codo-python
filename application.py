@@ -4,7 +4,7 @@ from Utils.contador_de_llamadas_definition import contador_de_llamadas
 # import Utils.contador_de_llamadas_definition
 from clase_objetos_1 import Persona
 from factorial_decorator import factorial
-
+from Utils.memoize import Memoize
 
 @contador_de_llamadas
 def factorial_2(x):
@@ -18,6 +18,15 @@ def factorial_2(x):
        return factorial_interior(x)
     else:
         raise TypeError("Error, no se puede realizar operacion")
+
+@Memoize
+def fibonacci(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
 
 def main():
     print("Este el entry point de mi programa")
@@ -44,5 +53,9 @@ def main():
     for n in range(1, 10):
         print(n)
         print(factorial(n))
+
+    #Executed twice, please check the debug
+    print(fibonacci(40))
+    print(fibonacci(40))
     
 main()
